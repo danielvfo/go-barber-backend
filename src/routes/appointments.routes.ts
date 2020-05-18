@@ -11,17 +11,13 @@ appointmentsRouter.use(bodyParser.json());
 appointmentsRouter.post('/', (request, response) => {
   const { provider, date } = request.body;
   const roundDate = startOfHour(parseISO(date));
-
-  const foundAppointment = appointmentsService.findByDate(roundDate);
-
+  const foundAppointment = appointmentsService.findByDate({ date: roundDate });
   if (foundAppointment !== null) {
     return response.status(400).json({
       message: 'This date and time already has a booking.',
     });
   }
-
-  const appointment = appointmentsService.create(provider, roundDate);
-
+  const appointment = appointmentsService.create({ provider, date: roundDate });
   return response.json(appointment);
 });
 

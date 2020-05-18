@@ -1,6 +1,14 @@
 import { isEqual } from 'date-fns';
 import Appointment from '../models/Appointment.model';
 
+interface CreateAppointmentDTO {
+  provider: string;
+  date: Date;
+}
+interface FindByDateDTO {
+  date: Date;
+}
+
 class AppointmentsService {
   private appointments: Appointment[];
 
@@ -8,11 +16,9 @@ class AppointmentsService {
     this.appointments = [];
   }
 
-  public create(provider: string, date: Date): Appointment {
-    const appointment = new Appointment(provider, date);
-
+  public create({ provider, date }: CreateAppointmentDTO): Appointment {
+    const appointment = new Appointment({ provider, date });
     this.appointments.push(appointment);
-
     return appointment;
   }
 
@@ -20,11 +26,10 @@ class AppointmentsService {
     return this.appointments;
   }
 
-  public findByDate(date: Date): Appointment | null {
+  public findByDate({ date }: FindByDateDTO): Appointment | null {
     const foundAppointment = this.appointments.find(appointment =>
       isEqual(date, appointment.date)
     );
-
     return foundAppointment || null;
   }
 }
