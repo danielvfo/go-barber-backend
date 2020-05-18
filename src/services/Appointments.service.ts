@@ -1,4 +1,4 @@
-import { isEqual, parseISO } from 'date-fns';
+import { isEqual } from 'date-fns';
 import Appointment from '../models/Appointment.model';
 
 class AppointmentsService {
