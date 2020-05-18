@@ -1,13 +1,7 @@
 import { Router } from 'express';
 import bodyParser from 'body-parser';
-import { uuid } from 'uuidv4';
 import { startOfHour, parseISO, isEqual } from 'date-fns';
-
-interface Appointment {
-  id: string;
-  provider: string;
-  date: Date;
-}
+import Appointment from '../models/Appointment.model';
 
 const appointmentsRouter = Router();
 appointmentsRouter.use(bodyParser.json());
@@ -27,11 +21,8 @@ appointmentsRouter.post('/', (request, response) => {
     });
   }
 
-  const appointment = {
-    id: uuid(),
-    provider,
-    date: roundDate,
-  };
+  const appointment = new Appointment(provider, roundDate);
+
   appointments.push(appointment);
   return response.json(appointment);
 });
