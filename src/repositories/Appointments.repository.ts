@@ -9,7 +9,7 @@ interface FindByDateDTO {
   date: Date;
 }
 
-class AppointmentsService {
+class AppointmentsRepository {
   private appointments: Appointment[];
 
   constructor() {
@@ -34,4 +34,4 @@ class AppointmentsService {
   }
 }
 
-export default AppointmentsService;
+export default AppointmentsRepository;

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import bodyParser from 'body-parser';
 import { startOfHour, parseISO } from 'date-fns';
-import AppointmentsService from '../services/Appointments.service';
+import AppointmentsService from '../repositories/Appointments.repository';
 
 const appointmentsRouter = Router();
 const appointmentsService = new AppointmentsService();
