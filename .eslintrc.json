@@ -21,6 +21,7 @@
   "plugins": ["@typescript-eslint", "import", "prettier"],
   "rules": {
     "prettier/prettier": "error",
+    "class-methods-use-this": "off",
     "import/no-unresolved": "error",
     "import/extensions": [
       "error",
