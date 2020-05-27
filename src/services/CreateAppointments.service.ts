@@ -9,7 +9,7 @@ interface RequestDTO {
 }
 
 class CreateAppointmentsService {
-  public async excecute({ provider, date }: RequestDTO): Promise<Appointment> {
+  public async execute({ provider, date }: RequestDTO): Promise<Appointment> {
     const appointmentsRepository = getCustomRepository(AppointmentsRepository);
     const roundDate = startOfHour(date);
     const foundAppointment = await appointmentsRepository.findByDate(roundDate);
