@@ -11,11 +11,11 @@ appointmentsRouter.use(bodyParser.json());
 
 appointmentsRouter.post('/', async (request, response) => {
   try {
-    const { provider, date } = request.body;
+    const { providerId, date } = request.body;
     const parsedDate = parseISO(date);
     const createAppointment = new CreateAppointmentsService();
     const appointment = await createAppointment.execute({
-      provider,
+      providerId,
       date: parsedDate,
     });
     return response.json(appointment);

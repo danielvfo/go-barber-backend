@@ -9,26 +9,27 @@ export default class CreateAppointments1590464469698
         columns: [
           {
             name: 'id',
-            type: 'varchar',
+            type: 'uniqueidentifier',
             isPrimary: true,
             generationStrategy: 'uuid',
             default: 'NEWID()',
           },
           {
-            name: 'provider',
-            type: 'varchar',
+            name: 'providerId',
+            type: 'uniqueidentifier',
+            isNullable: true,
           },
           {
             name: 'date',
             type: 'datetimeoffset',
           },
           {
-            name: 'created_at',
+            name: 'createdAt',
             type: 'datetimeoffset',
             default: 'SYSDATETIMEOFFSET()',
           },
           {
-            name: 'updated_at',
+            name: 'updatedAt',
             type: 'datetimeoffset',
             default: 'SYSDATETIMEOFFSET()',
           },

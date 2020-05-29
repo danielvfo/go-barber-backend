@@ -8,7 +8,7 @@ export default class CreateUsers1590510404791 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'varchar',
+            type: 'uniqueidentifier',
             isPrimary: true,
             generationStrategy: 'uuid',
             default: 'NEWID()',
@@ -19,7 +19,7 @@ export default class CreateUsers1590510404791 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'user_name',
+            name: 'userName',
             type: 'varchar',
             isUnique: true,
           },
@@ -33,12 +33,12 @@ export default class CreateUsers1590510404791 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'created_at',
+            name: 'createdAt',
             type: 'datetimeoffset',
             default: ' SYSDATETIMEOFFSET()',
           },
           {
-            name: 'updated_at',
+            name: 'updatedAt',
             type: 'datetime2',
             default: 'SYSDATETIMEOFFSET()',
           },

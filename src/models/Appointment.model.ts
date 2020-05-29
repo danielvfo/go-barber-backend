@@ -4,24 +4,31 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import User from './User.model';
 
 @Entity('appointments')
 class Appointment {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  provider: string;
+  @Column('uuid')
+  providerId: string;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'providerId' })
+  user: User;
 
   @Column('datetimeoffset')
   date: Date;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 }
 
 export default Appointment;
