@@ -105,3 +105,6 @@ dist
 
 # TypeORM config file
 ormconfig.json
+
+# Other, config folder
+/src/config/
