@@ -107,4 +107,9 @@ dist
 ormconfig.json
 
 # Other, config folder
-/src/config/
+src/config/*
+!src/config/upload.ts
+
+# Temp folder
+tmp/*
+!tmp/.gitkeep
