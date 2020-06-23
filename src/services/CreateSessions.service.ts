@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import User from '../models/User.model';
+import AppError from '../errors/AppError';
 import authConfig from '../config/auth';
 
 interface RequestSessionDTO {
@@ -23,13 +24,13 @@ class CreateSessionsService {
     const user = await usersRepository.findOne({ where: { email } });
 
     if (!user) {
-      throw new Error('Incorrect email or password');
+      throw new AppError('Incorrect email or password', 401);
     }
 
     const validPassword = await compare(password, user.password);
 
     if (!validPassword) {
-      throw new Error('Incorrect email or password');
+      throw new AppError('Incorrect email or password', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;

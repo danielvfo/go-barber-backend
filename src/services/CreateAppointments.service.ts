@@ -2,6 +2,7 @@ import { startOfHour } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
 import Appointment from '../models/Appointment.model';
 import AppointmentsRepository from '../repositories/Appointments.repository';
+import AppError from '../errors/AppError';
 
 interface RequestDTO {
   providerId: string;
@@ -14,7 +15,7 @@ class CreateAppointmentsService {
     const roundDate = startOfHour(date);
     const foundAppointment = await appointmentsRepository.findByDate(roundDate);
     if (foundAppointment) {
-      throw Error('This date and time already has a booking.');
+      throw new AppError('This date and time already has a booking.');
     }
     const appointment = appointmentsRepository.create({
       providerId,

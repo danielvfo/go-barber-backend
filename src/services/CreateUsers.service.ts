@@ -1,6 +1,7 @@
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 import User from '../models/User.model';
+import AppError from '../errors/AppError';
 
 interface RequestUserDTO {
   name: string;
@@ -26,7 +27,7 @@ class CreateUsersService {
     });
 
     if (emailExists || userNameExists) {
-      throw Error('User name or email already registered.');
+      throw new AppError('User name or email already registered.');
     }
 
     const hashedPassword = await hash(password, 7);

@@ -12,18 +12,14 @@ appointmentsRouter.use(bodyParser.json());
 appointmentsRouter.use(ensureAuthentication);
 
 appointmentsRouter.post('/', async (request, response) => {
-  try {
-    const { providerId, date } = request.body;
-    const parsedDate = parseISO(date);
-    const createAppointment = new CreateAppointmentsService();
-    const appointment = await createAppointment.execute({
-      providerId,
-      date: parsedDate,
-    });
-    return response.json(appointment);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
+  const { providerId, date } = request.body;
+  const parsedDate = parseISO(date);
+  const createAppointment = new CreateAppointmentsService();
+  const appointment = await createAppointment.execute({
+    providerId,
+    date: parsedDate,
+  });
+  return response.json(appointment);
 });
 
 appointmentsRouter.get('/', async (request, response) => {
