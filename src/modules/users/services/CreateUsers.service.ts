@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
-import User from '../models/User.model';
-import AppError from '../errors/AppError';
+import User from '@modules/users/infra/typeorm/entities/User.model';
+import AppError from '@shared/errors/AppError';
 
 interface RequestUserDTO {
   name: string;
@@ -39,7 +39,7 @@ class CreateUsersService {
     });
     await userRepository.save(user);
 
-    delete user.password;
+    user.password = '';
     return user;
   }
 }

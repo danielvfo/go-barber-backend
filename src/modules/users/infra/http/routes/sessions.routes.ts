@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import bodyParser from 'body-parser';
-import CreateSessionsService from '../services/CreateSessions.service';
+import CreateSessionsService from '@modules/users/services/CreateSessions.service';
 
 const sessionsRouter = Router();
 

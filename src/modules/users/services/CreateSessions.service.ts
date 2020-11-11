@@ -1,9 +1,9 @@
 import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import User from '../models/User.model';
-import AppError from '../errors/AppError';
-import authConfig from '../config/auth';
+import User from '@modules/users/infra/typeorm/entities/User.model';
+import AppError from '@shared/errors/AppError';
+import authConfig from '@config/auth';
 
 interface RequestSessionDTO {
   email: string;
@@ -39,7 +39,7 @@ class CreateSessionsService {
       expiresIn,
     });
 
-    delete user.password;
+    user.password = '';
 
     return { user, token };
   }

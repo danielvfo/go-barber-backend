@@ -1,9 +1,9 @@
 import { getRepository } from 'typeorm';
 import path from 'path';
 import fs from 'fs';
-import User from '../models/User.model';
-import uploadConfig from '../config/upload';
-import AppError from '../errors/AppError';
+import User from '@modules/users/infra/typeorm/entities/User.model';
+import uploadConfig from '@config/upload';
+import AppError from '@shared/errors/AppError';
 
 interface RequestUserAvatarDTO {
   userId: string;
@@ -36,7 +36,7 @@ class UpdateUserAvatarService {
 
     user.avatar = avatarFilename;
     await userRepository.save(user);
-    delete user.password;
+    user.password = '';
     return user;
   }
 }
