@@ -1,27 +1,27 @@
-import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import User from '@modules/users/infra/typeorm/entities/User.model';
 import AppError from '@shared/errors/AppError';
 import authConfig from '@config/auth';
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
-interface RequestSessionDTO {
+interface IRequestSessionDTO {
   email: string;
   password: string;
 }
 
-interface ResponseSessionDTO {
+interface IResponseSessionDTO {
   user: User;
   token: string;
 }
 class CreateSessionsService {
+  constructor(private usersRepository: IUsersRepository) {}
+
   public async execute({
     email,
     password,
-  }: RequestSessionDTO): Promise<ResponseSessionDTO> {
-    const usersRepository = getRepository(User);
-
-    const user = await usersRepository.findOne({ where: { email } });
+  }: IRequestSessionDTO): Promise<IResponseSessionDTO> {
+    const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError('Incorrect email or password', 401);
